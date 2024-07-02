@@ -1,7 +1,7 @@
 extends PlayerState
 
 
-const SPEED := 160.0
+const SPEED := 200.0
 const ACCELERATION := 10
 const DECELERATION := 10
 const ACCELERATE_OTHER_DIRECTION_FACTOR := 1.5
@@ -20,6 +20,6 @@ func physic(delta: float) -> void:
 		request_jump()
 	elif stands_still():
 		request_idle()
-	elif want_and_can_dash():
-		request_dash(get_horizontal_input_strength())
+	elif want_and_can_slide():
+		request_slide(get_horizontal_input_strength())
 

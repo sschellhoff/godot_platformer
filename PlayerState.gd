@@ -27,6 +27,11 @@ func request_dash(direction: float) -> void:
 	request_transition("Dash", {direction = sign(direction)})
 
 
+func request_slide(direction: float) -> void:
+	request_transition("Slide", {direction = sign(direction)})
+
+
+
 func request_wall() -> void:
 	request_transition("Wall")
 
@@ -55,6 +60,14 @@ func want_and_can_dash() -> bool:
 
 
 func want_dash() -> bool:
+	return Input.is_action_just_pressed("dash")
+
+
+func want_and_can_slide() -> bool:
+	return want_slide() and !is_zero_approx(get_horizontal_input_strength())
+
+
+func want_slide() -> bool:
 	return Input.is_action_just_pressed("dash")
 
 

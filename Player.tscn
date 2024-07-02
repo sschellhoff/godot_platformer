@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4cvm5m8xxmg7"]
+[gd_scene load_steps=11 format=3 uid="uid://b4cvm5m8xxmg7"]
 
 [ext_resource type="Texture2D" uid="uid://b5rp7i3fqg1ou" path="res://assets/player.png" id="1_gkbqv"]
 [ext_resource type="Script" path="res://Statemachine.gd" id="2_b1cmp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://fall.gd" id="5_fe2cr"]
 [ext_resource type="Script" path="res://dash.gd" id="6_frlrf"]
 [ext_resource type="Script" path="res://StateName.gd" id="7_1iq7l"]
+[ext_resource type="Script" path="res://Slide.gd" id="8_8np4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyofp"]
 size = Vector2(21, 24)
@@ -54,6 +55,9 @@ script = ExtResource("5_fe2cr")
 
 [node name="Dash" type="Node" parent="Statemachine"]
 script = ExtResource("6_frlrf")
+
+[node name="Slide" type="Node" parent="Statemachine"]
+script = ExtResource("8_8np4d")
 
 [node name="StateName" type="Label" parent="."]
 offset_left = -25.0
