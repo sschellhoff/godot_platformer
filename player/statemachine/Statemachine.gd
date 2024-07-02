@@ -20,6 +20,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# TODO move this code
 	state.physic(delta)
 	if owner.velocity.x > 0:
 		$"../WallDetectorTop".scale.y = 1
@@ -49,3 +50,14 @@ func transition(name: String, data:= {}) -> void:
 	state = new_state
 	state.enter(data)
 	emit_signal("transitioned", name)
+
+
+func _on_player_animation_height_change(is_small: bool):
+	# TODO move this code
+	# TODO fix when slide stops below flat ceiling
+	if is_small:
+		$"../SlideCollision".disabled = false
+		$"../StandCollision".disabled = true
+	else:
+		$"../StandCollision".disabled = false
+		$"../SlideCollision".disabled = true

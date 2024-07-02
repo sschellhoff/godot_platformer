@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://byvoeqv3gdr4y"]
 
-[ext_resource type="Script" path="res://test.gd" id="1_qpi7u"]
+[ext_resource type="Script" path="res://PlayerAnimation.gd" id="1_1i0s1"]
 [ext_resource type="Texture2D" uid="uid://crqak4ncfqxpy" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="2_ryvv2"]
 [ext_resource type="Texture2D" uid="uid://dhti048mn7ian" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Fall.png" id="3_yy7rg"]
 [ext_resource type="Texture2D" uid="uid://cjpr8qwgkri8w" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Run.png" id="4_44q25"]
@@ -505,8 +505,8 @@ _data = {
 "wall_slide": SubResource("Animation_2fuxv")
 }
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_qpi7u")
+[node name="PlayerAnimation" type="Node2D"]
+script = ExtResource("1_1i0s1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -40)
@@ -517,6 +517,3 @@ hframes = 10
 libraries = {
 "": SubResource("AnimationLibrary_64g08")
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)

@@ -1,6 +1,9 @@
 extends Node2D
 
+var last_animation = ""
 var current_animation = "idle"
+
+signal height_change(is_small: bool)
 
 func _physics_process(delta):
 	if owner.velocity.x < 0:
@@ -15,9 +18,14 @@ func _physics_process(delta):
 		$AnimationPlayer.play("jump")
 	else:
 		$AnimationPlayer.play(current_animation)
+	
+	if last_animation != current_animation:
+		emit_signal("height_change", current_animation == "slide")
+	
 
 
 func _on_statemachine_transitioned(new_state):
+	last_animation = current_animation
 	match new_state:
 		"Fall":
 			current_animation = "fall"

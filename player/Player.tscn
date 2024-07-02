@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4cvm5m8xxmg7"]
+[gd_scene load_steps=12 format=3 uid="uid://b4cvm5m8xxmg7"]
 
 [ext_resource type="Script" path="res://player/statemachine/Statemachine.gd" id="2_b1cmp"]
 [ext_resource type="Script" path="res://player/statemachine/idle.gd" id="3_v2k6h"]
@@ -8,10 +8,12 @@
 [ext_resource type="Script" path="res://player/statemachine/dash.gd" id="6_frlrf"]
 [ext_resource type="Script" path="res://player/StateName.gd" id="7_1iq7l"]
 [ext_resource type="Script" path="res://player/statemachine/Slide.gd" id="8_8np4d"]
-[ext_resource type="PackedScene" uid="uid://byvoeqv3gdr4y" path="res://test.tscn" id="10_q1rlb"]
+[ext_resource type="PackedScene" uid="uid://byvoeqv3gdr4y" path="res://PlayerAnimation.tscn" id="9_mi5fs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6s73"]
 size = Vector2(20, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p2iv"]
 
 [node name="Player" type="CharacterBody2D"]
 
@@ -58,12 +60,17 @@ offset_bottom = -13.0
 text = "HELLO"
 script = ExtResource("7_1iq7l")
 
-[node name="Node2D" parent="." instance=ExtResource("10_q1rlb")]
+[node name="PlayerAnimation" parent="." instance=ExtResource("9_mi5fs")]
 position = Vector2(2.08165e-12, 20)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="StandCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
 shape = SubResource("RectangleShape2D_v6s73")
 
+[node name="SlideCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 10)
+shape = SubResource("RectangleShape2D_8p2iv")
+
 [connection signal="transitioned" from="Statemachine" to="StateName" method="_on_statemachine_transitioned"]
-[connection signal="transitioned" from="Statemachine" to="Node2D" method="_on_statemachine_transitioned"]
+[connection signal="transitioned" from="Statemachine" to="PlayerAnimation" method="_on_statemachine_transitioned"]
+[connection signal="height_change" from="PlayerAnimation" to="Statemachine" method="_on_player_animation_height_change"]
