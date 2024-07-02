@@ -22,11 +22,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	state.physic(delta)
 	if owner.velocity.x > 0:
-		$"../Sprite2D".flip_h = false
 		$"../WallDetectorTop".scale.y = 1
 		$"../WallDetectorBottom".scale.y = 1
 	elif owner.velocity.x < 0:
-		$"../Sprite2D".flip_h = true
 		$"../WallDetectorTop".scale.y = -1
 		$"../WallDetectorBottom".scale.y = -1
 

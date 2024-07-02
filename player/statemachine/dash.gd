@@ -3,7 +3,7 @@ extends PlayerState
 
 const SPEED = 500
 
-const DASH_TIME := 0.2
+const DASH_TIME := 0.3
 const VERTICAL_DUMPING := 0.015
 
 

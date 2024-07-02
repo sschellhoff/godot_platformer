@@ -1,6 +1,5 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4cvm5m8xxmg7"]
 
-[ext_resource type="Texture2D" uid="uid://b5rp7i3fqg1ou" path="res://assets/player.png" id="1_gkbqv"]
 [ext_resource type="Script" path="res://player/statemachine/Statemachine.gd" id="2_b1cmp"]
 [ext_resource type="Script" path="res://player/statemachine/idle.gd" id="3_v2k6h"]
 [ext_resource type="Script" path="res://player/statemachine/Wall.gd" id="4_lhn0b"]
@@ -9,23 +8,15 @@
 [ext_resource type="Script" path="res://player/statemachine/dash.gd" id="6_frlrf"]
 [ext_resource type="Script" path="res://player/StateName.gd" id="7_1iq7l"]
 [ext_resource type="Script" path="res://player/statemachine/Slide.gd" id="8_8np4d"]
+[ext_resource type="PackedScene" uid="uid://byvoeqv3gdr4y" path="res://test.tscn" id="10_q1rlb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tyofp"]
-size = Vector2(22, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6s73"]
+size = Vector2(20, 38)
 
 [node name="Player" type="CharacterBody2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_gkbqv")
-hframes = 12
-vframes = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_tyofp")
 
 [node name="WallDetectorTop" type="RayCast2D" parent="."]
 position = Vector2(2.08165e-12, -2)
@@ -67,4 +58,12 @@ offset_bottom = -13.0
 text = "HELLO"
 script = ExtResource("7_1iq7l")
 
+[node name="Node2D" parent="." instance=ExtResource("10_q1rlb")]
+position = Vector2(2.08165e-12, 20)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_v6s73")
+
 [connection signal="transitioned" from="Statemachine" to="StateName" method="_on_statemachine_transitioned"]
+[connection signal="transitioned" from="Statemachine" to="Node2D" method="_on_statemachine_transitioned"]
