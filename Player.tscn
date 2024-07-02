@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4cvm5m8xxmg7"]
+
+[ext_resource type="Texture2D" uid="uid://b5rp7i3fqg1ou" path="res://assets/player.png" id="1_gkbqv"]
+[ext_resource type="Script" path="res://Statemachine.gd" id="2_b1cmp"]
+[ext_resource type="Script" path="res://idle.gd" id="3_v2k6h"]
+[ext_resource type="Script" path="res://Wall.gd" id="4_lhn0b"]
+[ext_resource type="Script" path="res://walk.gd" id="4_w04es"]
+[ext_resource type="Script" path="res://fall.gd" id="5_fe2cr"]
+[ext_resource type="Script" path="res://dash.gd" id="6_frlrf"]
+[ext_resource type="Script" path="res://StateName.gd" id="7_1iq7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tyofp"]
+size = Vector2(21, 24)
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gkbqv")
+hframes = 12
+vframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4)
+shape = SubResource("RectangleShape2D_tyofp")
+
+[node name="WallDetectorTop" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, -2)
+rotation = -1.5708
+target_position = Vector2(2.08165e-12, 12)
+
+[node name="WallDetectorBottom" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, 8)
+rotation = -1.5708
+target_position = Vector2(2.08165e-12, 12)
+
+[node name="Statemachine" type="Node" parent="."]
+script = ExtResource("2_b1cmp")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Statemachine"]
+script = ExtResource("3_v2k6h")
+
+[node name="Wall" type="Node" parent="Statemachine"]
+script = ExtResource("4_lhn0b")
+
+[node name="Walk" type="Node" parent="Statemachine"]
+script = ExtResource("4_w04es")
+
+[node name="Fall" type="Node" parent="Statemachine"]
+script = ExtResource("5_fe2cr")
+
+[node name="Dash" type="Node" parent="Statemachine"]
+script = ExtResource("6_frlrf")
+
+[node name="StateName" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -39.0
+offset_right = 26.0
+offset_bottom = -13.0
+text = "HELLO"
+script = ExtResource("7_1iq7l")
+
+[connection signal="transitioned" from="Statemachine" to="StateName" method="_on_statemachine_transitioned"]
