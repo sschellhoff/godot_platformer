@@ -15,12 +15,12 @@ func request_fall(with_coyote := false) -> void:
 	request_transition("Fall" , {coyote = with_coyote})
 
 
-func request_jump() -> void:
-	request_transition("Fall", {jump = true})
+func request_jump(jump_number := 0) -> void:
+	request_transition("Fall", {jump = jump_number})
 
 
 func request_wall_jump(speed: float) -> void:
-	request_transition("Fall", {jump = true, speed = speed})
+	request_transition("Fall", {jump = 0, speed = speed})
 
 
 func request_dash(direction: float) -> void:

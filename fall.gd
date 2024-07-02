@@ -3,6 +3,8 @@ extends PlayerState
 
 const JUMP_STRENGTH := 400
 
+const MAX_JUMPS := 2
+
 const JUMP_CAP_FACTOR := 0.2
 const JUMP_RELEASE_STRENGTH := 10
 
@@ -13,7 +15,7 @@ const AIR_HANG_FACTOR := 0.5
 const SPEED = 160
 
 const COYOTE_TIME := 0.5
-const EARLY_JUMP_TIME := 0.5
+const EARLY_JUMP_TIME := 0.05
 
 
 var coyote_timer: Timer
@@ -28,6 +30,8 @@ var is_forced_speed := false
 var can_cap_jump := false
 
 var was_on_wall := false
+
+var jump_number := MAX_JUMPS
 
 func _ready():
 	coyote_timer = Timer.new()
@@ -45,9 +49,10 @@ func _ready():
 
 
 func enter(data:= {}) -> void:
-	if data.has("jump") && data.get("jump") == true:
+	if data.has("jump"):
 		entity.velocity.y = -JUMP_STRENGTH
 		can_cap_jump = true
+		jump_number = data.get("jump")
 		if data.has("speed"):
 			entity.velocity.x = data.get("speed")
 			is_forced_speed = true
@@ -66,6 +71,7 @@ func exit() -> void:
 	is_forced_speed = false
 	can_cap_jump = false
 	was_on_wall = false
+	jump_number = MAX_JUMPS
 
 
 func physic(delta: float) -> void:
@@ -88,8 +94,11 @@ func physic(delta: float) -> void:
 	elif on_wall() && want_move_horizontal():
 		request_wall()
 	elif want_jump():
-		buffered_jump_timer.start(EARLY_JUMP_TIME)
-		is_jump_buffered = true
+		if jump_number + 1 < MAX_JUMPS:
+			request_jump(jump_number + 1)
+		else:
+			buffered_jump_timer.start(EARLY_JUMP_TIME)
+			is_jump_buffered = true
 	elif want_and_can_dash():
 		request_dash(get_horizontal_input_strength())
 	elif entity.is_on_floor():
