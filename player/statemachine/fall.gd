@@ -80,7 +80,7 @@ func physic(delta: float) -> void:
 	
 	entity.move_and_slide()
 	
-	entity.velocity.y += get_gravity()
+	entity.velocity.y += get_gravity(GRAVITY, AIR_HANG_FACTOR, AIR_HANG_THRESHOLD)
 	
 	handle_jump_cap()
 	
@@ -90,7 +90,8 @@ func physic(delta: float) -> void:
 	
 	if want_jump() and can_coyote_jump:
 		request_jump()
-		
+	elif want_attack():
+		request_attack(true)
 	elif on_wall() && want_move_horizontal():
 		request_wall()
 	elif want_jump():
@@ -124,13 +125,6 @@ func handle_grounding():
 		request_idle()
 	else:
 		request_walk()
-
-func get_gravity() -> float:	
-	if false:
-		pass	
-	elif abs(entity.velocity.y) < AIR_HANG_THRESHOLD:
-		return GRAVITY * AIR_HANG_FACTOR
-	return GRAVITY
 
 
 func _on_coyote_timer_timeout():

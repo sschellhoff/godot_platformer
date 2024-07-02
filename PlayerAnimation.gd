@@ -5,6 +5,8 @@ var current_animation = "idle"
 
 signal height_change(is_small: bool)
 
+signal attack_state_change(is_attack_active: bool)
+
 func _physics_process(delta):
 	if owner.velocity.x < 0:
 		$Sprite2D.flip_h = true
@@ -21,6 +23,7 @@ func _physics_process(delta):
 	
 	if last_animation != current_animation:
 		emit_signal("height_change", current_animation == "slide")
+		emit_signal("attack_state_change", current_animation == "attack")
 	
 
 

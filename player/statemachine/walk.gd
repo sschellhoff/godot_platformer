@@ -18,6 +18,8 @@ func physic(delta: float) -> void:
 	
 	if want_jump():
 		request_jump()
+	elif want_attack():
+		request_attack()
 	elif stands_still():
 		request_idle()
 	elif want_and_can_slide():

@@ -23,6 +23,10 @@ func request_wall_jump(speed: float) -> void:
 	request_transition("Fall", {jump = 0, speed = speed})
 
 
+func request_attack(keep_speed := false) -> void:
+	request_transition("Attack", {keep_speed = keep_speed})
+
+
 func request_dash(direction: float) -> void:
 	request_transition("Dash", {direction = sign(direction)})
 
@@ -53,6 +57,10 @@ func want_move_left() -> bool:
 
 func want_jump() -> bool:
 	return Input.is_action_just_pressed("jump")
+
+
+func want_attack() -> bool:
+	return Input.is_action_just_pressed("attack")
 
 
 func want_and_can_dash() -> bool:
@@ -126,4 +134,10 @@ func get_acceleration(acceleration: float, acceleration_other_direction_factor) 
 	if want_move_in_current_direction():
 		return acceleration
 	return acceleration * acceleration_other_direction_factor
+
+
+func get_gravity(base_gravity: float, air_hang_factor: float, air_hang_threshold: float) -> float:	
+	if abs(entity.velocity.y) < air_hang_threshold:
+		return base_gravity * air_hang_factor
+	return base_gravity
 

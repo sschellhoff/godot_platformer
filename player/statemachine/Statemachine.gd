@@ -25,9 +25,11 @@ func _physics_process(delta: float) -> void:
 	if owner.velocity.x > 0:
 		$"../WallDetectorTop".scale.y = 1
 		$"../WallDetectorBottom".scale.y = 1
+		$"../AttackShape/AttackCollider".position.x = 28
 	elif owner.velocity.x < 0:
 		$"../WallDetectorTop".scale.y = -1
 		$"../WallDetectorBottom".scale.y = -1
+		$"../AttackShape/AttackCollider".position.x = -28
 
 
 func _process(delta: float) -> void:
@@ -61,3 +63,7 @@ func _on_player_animation_height_change(is_small: bool):
 	else:
 		$"../StandCollision".disabled = false
 		$"../SlideCollision".disabled = true
+
+
+func _on_player_animation_attack_state_change(is_attack_active):
+	$"../AttackShape/AttackCollider".disabled = !is_attack_active

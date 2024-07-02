@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4cvm5m8xxmg7"]
+[gd_scene load_steps=14 format=3 uid="uid://b4cvm5m8xxmg7"]
 
 [ext_resource type="Script" path="res://player/statemachine/Statemachine.gd" id="2_b1cmp"]
 [ext_resource type="Script" path="res://player/statemachine/idle.gd" id="3_v2k6h"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://player/statemachine/dash.gd" id="6_frlrf"]
 [ext_resource type="Script" path="res://player/StateName.gd" id="7_1iq7l"]
 [ext_resource type="Script" path="res://player/statemachine/Slide.gd" id="8_8np4d"]
+[ext_resource type="Script" path="res://player/statemachine/Attack.gd" id="8_d2061"]
 [ext_resource type="PackedScene" uid="uid://byvoeqv3gdr4y" path="res://PlayerAnimation.tscn" id="9_mi5fs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6s73"]
@@ -15,10 +16,13 @@ size = Vector2(20, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p2iv"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sg4bb"]
+size = Vector2(32, 36)
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="WallDetectorTop" type="RayCast2D" parent="."]
 position = Vector2(2.08165e-12, -2)
@@ -52,6 +56,9 @@ script = ExtResource("6_frlrf")
 [node name="Slide" type="Node" parent="Statemachine"]
 script = ExtResource("8_8np4d")
 
+[node name="Attack" type="Node" parent="Statemachine"]
+script = ExtResource("8_d2061")
+
 [node name="StateName" type="Label" parent="."]
 offset_left = -25.0
 offset_top = -39.0
@@ -71,6 +78,15 @@ shape = SubResource("RectangleShape2D_v6s73")
 position = Vector2(-1, 10)
 shape = SubResource("RectangleShape2D_8p2iv")
 
+[node name="AttackShape" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 40
+
+[node name="AttackCollider" type="CollisionShape2D" parent="AttackShape"]
+position = Vector2(28, 1)
+shape = SubResource("RectangleShape2D_sg4bb")
+
 [connection signal="transitioned" from="Statemachine" to="StateName" method="_on_statemachine_transitioned"]
 [connection signal="transitioned" from="Statemachine" to="PlayerAnimation" method="_on_statemachine_transitioned"]
+[connection signal="attack_state_change" from="PlayerAnimation" to="Statemachine" method="_on_player_animation_attack_state_change"]
 [connection signal="height_change" from="PlayerAnimation" to="Statemachine" method="_on_player_animation_height_change"]

@@ -12,5 +12,7 @@ func physic(delta: float) -> void:
 	
 	if want_jump():
 		request_jump()
+	if want_attack():
+		request_attack()
 	elif want_move_horizontal():
 		request_walk()
