@@ -83,10 +83,14 @@ func get_horizontal_input_direction() -> float:
 	return sign(get_horizontal_input_strength())
 
 
-func want_move_in_current_direction() -> float:
+func want_move_in_current_direction() -> bool:
 	var current_direction = entity.velocity.x
 	var wanted_direction = get_horizontal_input_direction()
 	return sign(current_direction) == wanted_direction && wanted_direction != 0
+
+
+func want_move_in_other_direction() -> bool:
+	return facing_direction() != get_horizontal_input_direction()
 
 
 # ===== State =====
@@ -95,6 +99,9 @@ func want_move_in_current_direction() -> float:
 func is_falling() -> bool:
 	return entity.velocity.y >= 0
 
+
+func facing_direction() -> int:
+	return sign($"../../WallDetectorTop".scale.y)
 
 # ===== Movement =====
 

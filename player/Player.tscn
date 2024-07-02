@@ -1,17 +1,17 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4cvm5m8xxmg7"]
 
 [ext_resource type="Texture2D" uid="uid://b5rp7i3fqg1ou" path="res://assets/player.png" id="1_gkbqv"]
-[ext_resource type="Script" path="res://Statemachine.gd" id="2_b1cmp"]
-[ext_resource type="Script" path="res://idle.gd" id="3_v2k6h"]
-[ext_resource type="Script" path="res://Wall.gd" id="4_lhn0b"]
-[ext_resource type="Script" path="res://walk.gd" id="4_w04es"]
-[ext_resource type="Script" path="res://fall.gd" id="5_fe2cr"]
-[ext_resource type="Script" path="res://dash.gd" id="6_frlrf"]
-[ext_resource type="Script" path="res://StateName.gd" id="7_1iq7l"]
-[ext_resource type="Script" path="res://Slide.gd" id="8_8np4d"]
+[ext_resource type="Script" path="res://player/statemachine/Statemachine.gd" id="2_b1cmp"]
+[ext_resource type="Script" path="res://player/statemachine/idle.gd" id="3_v2k6h"]
+[ext_resource type="Script" path="res://player/statemachine/Wall.gd" id="4_lhn0b"]
+[ext_resource type="Script" path="res://player/statemachine/walk.gd" id="4_w04es"]
+[ext_resource type="Script" path="res://player/statemachine/fall.gd" id="5_fe2cr"]
+[ext_resource type="Script" path="res://player/statemachine/dash.gd" id="6_frlrf"]
+[ext_resource type="Script" path="res://player/StateName.gd" id="7_1iq7l"]
+[ext_resource type="Script" path="res://player/statemachine/Slide.gd" id="8_8np4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyofp"]
-size = Vector2(21, 24)
+size = Vector2(22, 24)
 
 [node name="Player" type="CharacterBody2D"]
 
@@ -24,7 +24,7 @@ hframes = 12
 vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 4)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_tyofp")
 
 [node name="WallDetectorTop" type="RayCast2D" parent="."]

@@ -94,20 +94,11 @@ func physic(delta: float) -> void:
 	elif on_wall() && want_move_horizontal():
 		request_wall()
 	elif want_jump():
-		if jump_number + 1 < MAX_JUMPS:
-			request_jump(jump_number + 1)
-		else:
-			buffered_jump_timer.start(EARLY_JUMP_TIME)
-			is_jump_buffered = true
+		handle_jump_from_air()
 	elif want_and_can_dash():
 		request_dash(get_horizontal_input_strength())
 	elif entity.is_on_floor():
-		if is_jump_buffered:
-			request_jump()
-		elif is_zero_approx(entity.velocity.x):
-			request_idle()
-		else:
-			request_walk()
+		handle_grounding()
 
 
 func handle_jump_cap() -> void:
@@ -117,6 +108,22 @@ func handle_jump_cap() -> void:
 		if Input.is_action_just_released("jump") && !is_falling():
 			entity.velocity.y *= JUMP_CAP_FACTOR
 
+
+func handle_jump_from_air():
+	if jump_number + 1 < MAX_JUMPS:
+		request_jump(jump_number + 1)
+	else:
+		buffered_jump_timer.start(EARLY_JUMP_TIME)
+		is_jump_buffered = true
+
+
+func handle_grounding():
+	if is_jump_buffered:
+		request_jump()
+	elif is_zero_approx(entity.velocity.x):
+		request_idle()
+	else:
+		request_walk()
 
 func get_gravity() -> float:	
 	if false:
