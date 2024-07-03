@@ -44,7 +44,7 @@ func physic(delta: float) -> void:
 
 func stop_slide():
 	if entity.is_on_floor():
-		request_idle()
+		request_crouch()
 	else:
 		request_fall(true)
 

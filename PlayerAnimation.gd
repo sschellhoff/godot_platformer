@@ -22,7 +22,7 @@ func _physics_process(delta):
 		$AnimationPlayer.play(current_animation)
 	
 	if last_animation != current_animation:
-		emit_signal("height_change", current_animation == "slide")
+		emit_signal("height_change", current_animation == "slide" || current_animation == "crouch")
 		emit_signal("attack_state_change", current_animation == "attack")
 	
 
@@ -40,8 +40,10 @@ func _on_statemachine_transitioned(new_state):
 			current_animation = "run"
 		"Slide":
 			current_animation = "slide"
+		"Crouch":
+			current_animation = "crouch"
 		"Wall":
 			current_animation = "wall_slide"
 		"Attack":
 			current_animation = "attack"
-			
+

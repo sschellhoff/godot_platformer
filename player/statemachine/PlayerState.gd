@@ -35,6 +35,9 @@ func request_slide(direction: float) -> void:
 	request_transition("Slide", {direction = sign(direction)})
 
 
+func request_crouch() -> void:
+	request_transition("Crouch")
+
 
 func request_wall() -> void:
 	request_transition("Wall")
@@ -109,7 +112,14 @@ func is_falling() -> bool:
 
 
 func facing_direction() -> int:
-	return sign($"../../WallDetectorTop".scale.y)
+	return sign($"../../WallDetector/Top".scale.y)
+
+
+func can_stand() -> bool:
+	var left_detector := $"../../CrouchStandUpDetector/Left" as RayCast2D
+	var right_detector := $"../../CrouchStandUpDetector/Right" as RayCast2D
+	return !left_detector.is_colliding() && !right_detector.is_colliding()
+
 
 # ===== Movement =====
 

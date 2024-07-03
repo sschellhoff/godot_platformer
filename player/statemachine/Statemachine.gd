@@ -23,12 +23,12 @@ func _physics_process(delta: float) -> void:
 	# TODO move this code
 	state.physic(delta)
 	if owner.velocity.x > 0:
-		$"../WallDetectorTop".scale.y = 1
-		$"../WallDetectorBottom".scale.y = 1
+		$"../WallDetector/Top".scale.y = 1
+		$"../WallDetector/Bottom".scale.y = 1
 		$"../AttackShape/AttackCollider".position.x = 28
 	elif owner.velocity.x < 0:
-		$"../WallDetectorTop".scale.y = -1
-		$"../WallDetectorBottom".scale.y = -1
+		$"../WallDetector/Top".scale.y = -1
+		$"../WallDetector/Bottom".scale.y = -1
 		$"../AttackShape/AttackCollider".position.x = -28
 
 

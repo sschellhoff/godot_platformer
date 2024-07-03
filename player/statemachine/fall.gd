@@ -140,6 +140,6 @@ func _on_forced_speet_timer_timeout():
 
 
 func on_wall() -> bool:
-	var top_detector := $"../../WallDetectorTop" as RayCast2D
-	var bottom_detector := $"../../WallDetectorBottom" as RayCast2D
+	var top_detector := $"../../WallDetector/Top" as RayCast2D
+	var bottom_detector := $"../../WallDetector/Bottom" as RayCast2D
 	return top_detector.is_colliding() && bottom_detector.is_colliding()

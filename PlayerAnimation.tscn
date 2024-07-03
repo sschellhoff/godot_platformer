@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://byvoeqv3gdr4y"]
+[gd_scene load_steps=22 format=3 uid="uid://byvoeqv3gdr4y"]
 
 [ext_resource type="Script" path="res://PlayerAnimation.gd" id="1_1i0s1"]
 [ext_resource type="Texture2D" uid="uid://crqak4ncfqxpy" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="2_ryvv2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cd0y6pve8k3al" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_WallSlide.png" id="7_mntpo"]
 [ext_resource type="Texture2D" uid="uid://ddjmx0ntomj2x" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_AttackNoMovement.png" id="8_i5bhm"]
 [ext_resource type="Texture2D" uid="uid://5el5ilexhewx" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Slide.png" id="9_aigvo"]
+[ext_resource type="Texture2D" uid="uid://deya61k6fjy7g" path="res://assets/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Crouch.png" id="10_xlum2"]
 
 [sub_resource type="Animation" id="Animation_8l5cw"]
 length = 0.001
@@ -492,10 +493,63 @@ tracks/3/keys = {
 "values": [1]
 }
 
+[sub_resource type="Animation" id="Animation_1qjve"]
+resource_name = "crouch"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_xlum2")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_64g08"]
 _data = {
 "RESET": SubResource("Animation_8l5cw"),
 "attack": SubResource("Animation_xwpmi"),
+"crouch": SubResource("Animation_1qjve"),
 "dash": SubResource("Animation_7rrck"),
 "fall": SubResource("Animation_uegb7"),
 "idle": SubResource("Animation_4lyph"),
