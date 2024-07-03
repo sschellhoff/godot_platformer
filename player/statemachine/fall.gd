@@ -92,7 +92,7 @@ func physic(delta: float) -> void:
 		request_jump()
 	elif want_attack():
 		request_attack(true)
-	elif on_wall() && want_move_horizontal():
+	elif want_move_on_wall():
 		request_wall()
 	elif want_jump():
 		handle_jump_from_air()
@@ -137,6 +137,10 @@ func _on_buffered_jump_timer_timeout():
 
 func _on_forced_speet_timer_timeout():
 	is_forced_speed = false
+
+
+func want_move_on_wall() -> bool:
+	return on_wall() && get_horizontal_input_direction() == facing_direction()
 
 
 func on_wall() -> bool:

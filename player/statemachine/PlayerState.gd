@@ -47,7 +47,7 @@ func request_wall() -> void:
 
 
 func want_move_horizontal() -> bool:
-	return want_move_left() || want_move_right()
+	return !(want_move_left() && want_move_right()) && (want_move_left() || want_move_right())
 
 
 func want_move_right() -> bool:
