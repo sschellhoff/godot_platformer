@@ -67,3 +67,4 @@ attack={
 
 textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_s3tc_bptc=true
+environment/defaults/default_clear_color=Color(0.750745, 0.752898, 0.890404, 1)
