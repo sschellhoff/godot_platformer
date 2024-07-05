@@ -11,6 +11,7 @@ const JUMP_RELEASE_STRENGTH := 10
 const GRAVITY = 20
 const AIR_HANG_THRESHOLD := 100
 const AIR_HANG_FACTOR := 0.5
+const MAX_FALL_SPEED := 600
 
 const SPEED = 160
 
@@ -81,6 +82,7 @@ func physic(delta: float) -> void:
 	entity.move_and_slide()
 	
 	entity.velocity.y += get_gravity(GRAVITY, AIR_HANG_FACTOR, AIR_HANG_THRESHOLD)
+	entity.velocity.y = min(MAX_FALL_SPEED, entity.velocity.y)
 	
 	handle_jump_cap()
 	

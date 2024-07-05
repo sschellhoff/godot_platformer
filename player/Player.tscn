@@ -23,8 +23,6 @@ size = Vector2(32, 36)
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Statemachine" type="Node" parent="."]
 script = ExtResource("2_b1cmp")
 initial_state = NodePath("Idle")
@@ -103,6 +101,14 @@ target_position = Vector2(2.08165e-12, 18)
 position = Vector2(5, 2.08165e-12)
 rotation = 3.14159
 target_position = Vector2(2.08165e-12, 18)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -880
+limit_top = -830
+limit_right = 350
+limit_bottom = 143
+limit_smoothed = true
+drag_horizontal_enabled = true
 
 [connection signal="transitioned" from="Statemachine" to="StateName" method="_on_statemachine_transitioned"]
 [connection signal="transitioned" from="Statemachine" to="PlayerAnimation" method="_on_statemachine_transitioned"]
